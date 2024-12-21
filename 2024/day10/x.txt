@@ -1,0 +1,144 @@
+  0123456
+  -------
+0|5590559
+1|5551598
+2|5552557
+3|6543456
+4|7655987
+5|8765555
+6|9875555
+
+
+
+  01234567
+0 89010123
+1 78121874
+2 87430965
+3 96549874
+4 45678903
+5 32019012
+6 01329801
+7 10456732
+
+## Row: 0, Col: 2
+Path # 0
+    (Row: 0, Col: 2) => 0, (Row: 4, Col: 5) => 9
+Path # 1
+    (Row: 0, Col: 2) => 0, (Row: 3, Col: 0) => 9
+Path # 2
+    (Row: 0, Col: 2) => 0, (Row: 0, Col: 1) => 9
+Path # 3
+    (Row: 0, Col: 2) => 0, (Row: 4, Col: 5) => 9
+Path # 4
+    (Row: 0, Col: 2) => 0, (Row: 3, Col: 0) => 9
+Path # 5
+    (Row: 0, Col: 2) => 0, (Row: 0, Col: 1) => 9
+Path # 6
+    (Row: 0, Col: 2) => 0, (Row: 4, Col: 5) => 9
+Path # 7
+    (Row: 0, Col: 2) => 0, (Row: 3, Col: 0) => 9
+Path # 8
+    (Row: 0, Col: 2) => 0, (Row: 0, Col: 1) => 9
+Path # 9
+    (Row: 0, Col: 2) => 0, (Row: 4, Col: 5) => 9
+Path # 10
+    (Row: 0, Col: 2) => 0, (Row: 3, Col: 0) => 9
+Path # 11
+    (Row: 0, Col: 2) => 0, (Row: 0, Col: 1) => 9
+    > Score: 3
+---
+## Row: 0, Col: 4
+Path # 0
+    (Row: 0, Col: 4) => 0, (Row: 4, Col: 5) => 9
+Path # 1
+    (Row: 0, Col: 4) => 0, (Row: 2, Col: 5) => 9
+Path # 2
+    (Row: 0, Col: 4) => 0, (Row: 4, Col: 5) => 9
+Path # 3
+    (Row: 0, Col: 4) => 0, (Row: 3, Col: 0) => 9
+Path # 4
+    (Row: 0, Col: 4) => 0, (Row: 0, Col: 1) => 9
+Path # 5
+    (Row: 0, Col: 4) => 0, (Row: 4, Col: 5) => 9
+Path # 6
+    (Row: 0, Col: 4) => 0, (Row: 3, Col: 0) => 9
+Path # 7
+    (Row: 0, Col: 4) => 0, (Row: 0, Col: 1) => 9
+Path # 8
+    (Row: 0, Col: 4) => 0, (Row: 4, Col: 5) => 9
+Path # 9
+    (Row: 0, Col: 4) => 0, (Row: 3, Col: 0) => 9
+Path # 10
+    (Row: 0, Col: 4) => 0, (Row: 0, Col: 1) => 9
+Path # 11
+    (Row: 0, Col: 4) => 0, (Row: 4, Col: 5) => 9
+Path # 12
+    (Row: 0, Col: 4) => 0, (Row: 3, Col: 0) => 9
+Path # 13
+    (Row: 0, Col: 4) => 0, (Row: 0, Col: 1) => 9
+    > Score: 4
+---
+## Row: 2, Col: 4
+Path # 0
+    (Row: 2, Col: 4) => 0, (Row: 4, Col: 5) => 9
+Path # 1
+    (Row: 2, Col: 4) => 0, (Row: 3, Col: 0) => 9
+Path # 2
+    (Row: 2, Col: 4) => 0, (Row: 0, Col: 1) => 9
+Path # 3
+    (Row: 2, Col: 4) => 0, (Row: 4, Col: 5) => 9
+Path # 4
+    (Row: 2, Col: 4) => 0, (Row: 3, Col: 0) => 9
+Path # 5
+    (Row: 2, Col: 4) => 0, (Row: 0, Col: 1) => 9
+    > Score: 3
+---
+## Row: 4, Col: 6
+Path # 0
+    (Row: 4, Col: 6) => 0, (Row: 4, Col: 5) => 9
+Path # 1
+    (Row: 4, Col: 6) => 0, (Row: 2, Col: 5) => 9
+    > Score: 2
+---
+## Row: 5, Col: 2
+Path # 0
+    (Row: 5, Col: 2) => 0, (Row: 6, Col: 4) => 9
+    > Score: 1
+---
+## Row: 5, Col: 5
+Path # 0
+    (Row: 5, Col: 5) => 0, (Row: 4, Col: 5) => 9
+Path # 1
+    (Row: 5, Col: 5) => 0, (Row: 2, Col: 5) => 9
+    > Score: 2
+---
+## Row: 6, Col: 0
+Path # 0
+    (Row: 6, Col: 0) => 0, (Row: 4, Col: 5) => 9
+Path # 1
+    (Row: 6, Col: 0) => 0, (Row: 3, Col: 0) => 9
+Path # 2
+    (Row: 6, Col: 0) => 0, (Row: 0, Col: 1) => 9
+    > Score: 3
+---
+## Row: 6, Col: 6
+Path # 0
+    (Row: 6, Col: 6) => 0, (Row: 4, Col: 5) => 9
+Path # 1
+    (Row: 6, Col: 6) => 0, (Row: 2, Col: 5) => 9
+Path # 2
+    (Row: 6, Col: 6) => 0, (Row: 4, Col: 5) => 9
+Path # 3
+    (Row: 6, Col: 6) => 0, (Row: 2, Col: 5) => 9
+    > Score: 2
+---
+## Row: 7, Col: 1
+Path # 0
+    (Row: 7, Col: 1) => 0, (Row: 4, Col: 5) => 9
+Path # 1
+    (Row: 7, Col: 1) => 0, (Row: 3, Col: 0) => 9
+Path # 2
+    (Row: 7, Col: 1) => 0, (Row: 0, Col: 1) => 9
+    > Score: 3
+---
+Sum of Scores: 23

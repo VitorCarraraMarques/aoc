@@ -1,0 +1,71 @@
+package main
+
+import (
+	"bytes"
+	"fmt"
+	"os"
+	"strconv"
+)
+
+const N_BLINKS = 25
+
+func main() {
+	stones := readStonesBytes()
+	fmt.Printf("Initial Arrangement: %+v\n", stones)
+	for i := 1; i <= N_BLINKS; i++ {
+        fmt.Printf("blink #%d =>", i) 
+        stones = blinkString(stones)
+        fmt.Printf(" finished.\n") 
+		// fmt.Printf("%+v\n\n", stones)
+	}
+	fmt.Printf("Final Number of Stones: %d\n", len(stones))
+
+}
+
+func blinkString(stones [][]byte) [][]byte {
+	N := len(stones)
+	fmt.Printf(" <%d> stones... ", N)
+	for i := 0; i < N; i++ {
+		s := stones[i]
+		if len(s) == 1 && s[0] == '0'  {
+		    s[0] = '1'
+		} else if len(s)%2 == 0 {
+			half := len(s) / 2
+			stones[i] = s[:half]
+			stones = append(stones, trimZeros(s[half:]))
+		} else {
+			n, _ := strconv.Atoi(string(s))
+			stones[i] = []byte(strconv.Itoa(n * 2024))
+		}
+	}
+	return stones
+}
+
+func readStonesBytes() [][]byte{
+	file := readFile("input.txt")
+	fields := bytes.Fields(file)
+	return fields
+}
+
+func readFile(name string) []byte {
+	file, err := os.ReadFile(name)
+	if err != nil {
+		err = fmt.Errorf("open file %s: %s\n", name, err)
+		fmt.Printf("ERROR: %s\n", err)
+		os.Exit(1)
+	}
+	return file
+}
+
+func assert(expr bool, msg string) {
+	if !expr {
+		panic(msg)
+	}
+}
+
+func trimZeros(a []byte) []byte {
+	i := 0
+	for ; a[i] == '0' && i < len(a) - 1; i++ {}
+    a = a[i:]
+	return a
+}

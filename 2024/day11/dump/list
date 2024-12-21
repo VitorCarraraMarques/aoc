@@ -1,0 +1,157 @@
+package main
+
+import (
+	"bytes"
+	"fmt"
+	"math"
+	"os"
+	"strconv"
+)
+
+const N_BLINKS = 75
+
+type List struct {
+	head *Node
+}
+
+func (l *List) Len() int {
+	n := 0
+	cur := l.head.next
+	for cur != nil {
+		n++
+		cur = cur.next
+	}
+	return n
+}
+
+type Node struct {
+	value uint
+	next  *Node
+}
+
+func main() {
+	stones := readStonesSlice()
+	fmt.Printf("Initial Arrangement: %+v\n", stones)
+	for i := 1; i <= N_BLINKS; i++ {
+	    fmt.Printf("   Blinking #%d ", i)
+        stones = blinkSlice(stones)
+    }
+    fmt.Printf("Final Number of Stones: %d\n", len(stones))
+
+	// fmt.Printf("Initial Arrangement: \n")
+	// stones.Len()
+	// fmt.Printf("\n\n")
+	// for i := 1; i <= N_BLINKS; i++ {
+	// 	fmt.Printf("   Blinking #%d ", i)
+	// 	blinkList(stones)
+	// 	fmt.Printf("\n")
+	// }
+	// n := stones.Len()
+	// fmt.Printf("Final Number of Stones: %d\n", n)
+}
+
+func blinkList(stones List) {
+	cur := stones.head.next
+	i := 0
+	for cur != nil {
+		s := cur.value
+		if s == 0 {
+			cur.value = 1
+		} else if n := digits(s); n%2 == 0 {
+			half := n / 2
+			left := s / uint(math.Pow(10, float64(half)))
+			right := s % uint(math.Pow(10, float64(half)))
+
+			cur.value = left
+			nxt := Node{value: right, next: (*cur).next}
+			(*cur).next = &nxt
+			cur = &nxt
+		} else {
+			cur.value = cur.value * 2024
+		}
+		cur = cur.next
+		i++
+	}
+	fmt.Printf(" => len = %d\n", i)
+}
+
+// uint -> 64bits -> 8 bytes
+// uint * 1_000 = 1 kB
+// uint * 1_000_000 = 1 MB
+// uint * 1_000_000_000 = 1 GB
+// uint * 5_000_000_000 = 5 GB
+
+func blinkSlice(stones []uint) []uint {
+	N := len(stones)
+	fmt.Printf("    Blinking with <%d> stones\n", N)
+	for i := 0; i < N; i++ {
+		s := stones[i]
+		if s == 0 {
+			stones[i] = 1
+		} else if n := digits(s); n%2 == 0 {
+			half := n / 2
+			left := s / uint(math.Pow(10, float64(half)))
+			right := s % uint(math.Pow(10, float64(half)))
+			stones[i] = left
+			stones = append(stones, right)
+		} else {
+			stones[i] = stones[i] * 2024
+		}
+	}
+	return stones
+}
+
+func readStonesList() List {
+	file := readFile("input.txt")
+	fields := bytes.Fields(file)
+	h := List{head: &Node{value: 0}}
+	cur := h.head
+	for _, b := range fields {
+		prev := cur
+
+		n, _ := strconv.Atoi(string(b))
+		cur = &Node{value: uint(n)}
+		prev.next = cur
+	}
+	return h
+}
+
+func readStonesSlice() []uint {
+	file := readFile("input.txt")
+	fields := bytes.Fields(file)
+	stones := make([]uint, len(fields))
+	for i, b := range fields {
+        n, _ :=  strconv.Atoi(string(b))
+		stones[i] = uint(n)
+	}
+	return stones
+}
+
+func readFile(name string) []byte {
+	file, err := os.ReadFile(name)
+	if err != nil {
+		err = fmt.Errorf("open file %s: %s\n", name, err)
+		fmt.Printf("ERROR: %s\n", err)
+		os.Exit(1)
+	}
+	return file
+}
+
+func assert(expr bool, msg string) {
+	if !expr {
+		panic(msg)
+	}
+}
+
+func digits(a uint) uint {
+	return uint(math.Floor(math.Log10(float64(a))) + 1)
+}
+
+func insert[T any](a []T, index int, value T) []T {
+	if len(a) == index {
+		return append(a, value)
+	}
+	a = append(a[:index+1], a[index:]...)
+	a[index] = value
+	return a
+}

@@ -1,0 +1,89 @@
+package main 
+
+import (
+	"bytes"
+	"fmt"
+	"os"
+	"strconv"
+)
+
+const PART = 2
+const N_BLINKS = 75
+
+func main() {
+	stones := readStones()
+    for i := 0; i < N_BLINKS; i++ {
+        //// fmt.Printf("---\n#%d Blink:\n", i)
+        stones = blink(stones)
+    }
+    fmt.Printf("PART %d: %d\n", PART, len(stones))
+}
+
+func blink(stones []string) []string {
+    N := len(stones)
+    for i := 0; i < N; i++ {
+        s := stones[i]
+		// fmt.Printf("Stone #%d: %+v", i, s)
+		if s == "0" {
+			// fmt.Printf(" => Apply Rule of Zero (Replace with 1)\n")
+			stones[i] = "1"
+		} else if len(s)%2 == 0 {
+			// fmt.Printf(" => Apply Rule of Even (Split in half)\n")
+			half := len(s) / 2
+
+			_left, _ := strconv.Atoi(s[:half])
+            left := strconv.Itoa(_left)
+
+			_right, _ := strconv.Atoi(s[half:])
+			right := strconv.Itoa(_right)
+
+			stones[i] = left
+			stones = insert(stones, i+1, right)
+            N++
+            i++
+			// fmt.Printf("    Spplited: %s, %s \n", left, right)
+		} else {
+            // fmt.Printf(" => Apply Rule of Other (Multiply by 2024)\n")
+			val, _ := strconv.Atoi(s)
+            nval := val * 2024
+            stones[i] = strconv.Itoa(nval)
+		}
+	}
+	// fmt.Printf("AfterMatch: %+v\n", stones)
+	return stones
+}
+
+func readStones() []string {
+	file := readFile("input.txt")
+	fields := bytes.Fields(file)
+	stones := make([]string, len(fields))
+	for i, b := range fields {
+		stones[i] = string(b)
+	}
+	return stones
+}
+
+func readFile(name string) []byte {
+	file, err := os.ReadFile(name)
+	if err != nil {
+		err = fmt.Errorf("open file %s: %s\n", name, err)
+		fmt.Printf("ERROR: %s\n", err)
+		os.Exit(1)
+	}
+	return file
+}
+
+func assert(expr bool, msg string) {
+	if !expr {
+		panic(msg)
+	}
+}
+
+func insert[T any](a []T, index int, value T) []T {
+	if len(a) == index {
+		return append(a, value)
+	}
+	a = append(a[:index+1], a[index:]...)
+	a[index] = value
+	return a
+}

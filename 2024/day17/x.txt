@@ -1,0 +1,37 @@
+Register A: 117440
+Register B: 0
+Register C: 0
+
+--
+0,3,5,4,3,0,
+          ^
+expected = 0
+f(a)     = 0 => regA = a
+
+--
+0,3,5,4,3,0,
+        ^
+expected = 3,0
+f(ba)    = 3,0 => regA = ba
+
+--
+0,3,5,4,3,0,
+      ^
+expected = 4,3,0
+f(cba)   = 4,3,0 => regA = ba
+
+
+
+------------------------------------------------------
+output reverse order
+0 -> out(combo(regs, prog[ip].Operand) % 8) = 0
+3
+4
+5
+3
+0
+
+5264074622047
+
+
+

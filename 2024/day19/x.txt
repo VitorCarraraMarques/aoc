@@ -1,0 +1,27 @@
+r, wr, b, g, bwu, rb, gb, br
+
+brwrr: {
+   {b r wr r}
+   {br wr r}
+}
+bggr: {
+
+}
+gbbr: {
+
+}
+rrbgbr: {
+
+}
+ubwu: {
+
+}
+bwurrg: {
+
+}
+brgr: {
+
+}
+bbrgwb: {
+
+}

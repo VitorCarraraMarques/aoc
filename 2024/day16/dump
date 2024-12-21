@@ -1,0 +1,77 @@
+type Queue []Item
+
+func (q Queue) Add(b Item) Queue {
+    q = append(q, b)
+    return q
+} 
+
+func (q Queue) PopRight() (Queue, Item) {
+    b := q[len(q)-1]
+    q = q[:len(q)-1]
+    return q, b
+}
+
+func (q Queue) PopLeft() (Queue, Item) {
+    b := q[0]
+    q = q[1:]
+    return q, b
+}
+
+func (q Queue) Len() int {
+    return len(q)
+}
+
+func bfs() []Item {
+    goal := reindeer.goal
+
+	best_score := math.Inf(1)
+	var ends []Item
+
+    item := Item{
+		value:    reindeer,
+		path:     make(Path),
+	}
+
+    q := Queue{item}
+
+	for i := 0; q.Len() > 0; i++ {
+		q, item = q.PopLeft()
+		item.path[item.value.pos] = true
+
+		clear()
+		fmt.Printf("#%d Iteration | %d Items Enqueued | Current Best Score: %f | Current Score: %d\n", i, q.Len(), best_score, item.value.score)
+		if VISUALIZATION {
+			printGrid()
+			time.Sleep(100*time.Millisecond)
+		}
+
+		if float64(item.value.score) > best_score {
+			continue
+        }
+
+		if item.value.pos == goal {
+			ends = append(ends, item)
+			best_score = float64(item.value.score)
+		}
+
+		if display[item.value.pos.Idx()] == '#' {
+			continue
+		}
+
+		for _, n := range item.value.Nbors() {
+			if item.path[n.pos] {
+				continue
+			}
+
+			p_nbor := make(Path)
+			maps.Copy(p_nbor, item.path)
+			nbor := Item{
+				value:    n,
+				path:     p_nbor,
+			}
+            q = q.Add(nbor)
+		}
+	}
+
+	return ends
+}
