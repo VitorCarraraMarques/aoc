@@ -1,0 +1,21 @@
+NUM_PAD 
+789
+456
+#0A
+
+DIR_PAD 
+#^A
+<v>
+
+RULES (A $ B == A is better than B)
+<v $ v<
+v> $ >v
+<^ $ ^<
+
+v< == <v
+v> == >v
+^< == <^
+^> == >^
+
+
+

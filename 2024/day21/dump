@@ -1,0 +1,94 @@
+type Queue []*Item
+
+func (q *Queue) Pop() any {
+	old := *q
+	n := len(old)
+	item := (*old[n-1])
+	old[n-1] = nil
+	item.index = -1
+	*q = old[0 : n-1]
+	return item
+}
+
+func (q *Queue) Len() int {
+	return len(*q)
+}
+
+func (q Queue) Less(i, j int) bool {
+	return q[i].cost < q[j].cost
+}
+
+func (q Queue) Swap(i, j int) {
+	q[i], q[j] = q[j], q[i]
+	q[i].index = i
+	q[j].index = j
+}
+
+func (pq *Queue) Push(x any) {
+	n := len(*pq)
+	item := x.(*Item)
+	item.index = n
+	*pq = append(*pq, item)
+}
+
+
+func (q *Queue) update(item *Item, cost int) {
+	item.cost = cost
+	heap.Fix(q, item.index)
+}
+
+type Item struct {
+	Vec2
+    index int
+    cost  int
+	seq   []byte
+}
+
+func findSequence(pad [][]byte, code byte, start Vec2) Item {
+	rows := len(pad)
+	cols := len(pad[0])
+	inBound := func(v Vec2) bool {
+		return (v.x >= 0 && v.x < cols &&
+			v.y >= 0 && v.y < rows &&
+			pad[v.y][v.x] != '#')
+	}
+    dist := func(v Vec2) int {
+        return 0
+    }
+
+    it := Item{
+        Vec2: start, 
+        index: 0,
+        seq:[]byte{},
+        cost: 0,
+    }
+    q := &Queue{&it}
+
+	visited := make(map[Vec2]bool)
+	for q.Len() > 0 {
+		cur := q.Pop().(*Item)
+
+		if visited[cur.Vec2] {
+			continue
+		}
+		visited[cur.Vec2] = true
+
+		if pad[cur.y][cur.x] == code {
+			cur.seq = append(cur.seq, 'A')
+			return *cur
+		}
+
+		for i, dir := range DIRS {
+			nbor := cur.Add(dir)
+			if !inBound(nbor) {
+				continue
+			}
+			nseq := copySequence(cur.seq)
+			sym := DIRSYM[i]
+			nseq[len(nseq)-1] = sym
+			q.Add(Item{nbor, nseq})
+		}
+	}
+	panic("bfs: no path found")
+}
+
