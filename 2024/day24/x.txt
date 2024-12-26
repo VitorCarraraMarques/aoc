@@ -1,0 +1,22 @@
+222 instructions
+4   wrong instructions
+
+222 choose 4 = 222! / (222 - 4)! * 4!
+             = 222! / 218! * 24
+             = 222*221*220*219*218! / 218! * 24
+             = 222*221*220*219 / 24
+             = 98491965
+
+
+111010101011011
+              ^
+              i = len(b) - 1
+
+
+z16 <-> fkb (z16 should be Sout, fkb should be Cout)
+rqf <-> nnr (rqf should be C1, nnr should be S1)
+z31 <-> rdn (z31 should be Sout, rdn should be C2)
+z37 <-> rrn (z37 should be Sout, rrn should be C1)
+
+
+fkb,nnr,rdn,rqf,rrn,z16,z31,z37
